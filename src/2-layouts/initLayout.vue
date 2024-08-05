@@ -1,6 +1,6 @@
 <script lang="ts">
 
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useAuthStore } from '@/6-entities/auth/store'
 import { storeToRefs } from 'pinia'
@@ -13,18 +13,23 @@ export default {
     const authStore = useAuthStore()
     const { isInit, isAuth } = storeToRefs(authStore)
 
+    watch([isAuth, isInit], async ([isAuthValue, isInitValue]: [boolean, boolean]) => {
+      if (!isInitValue) {
+        return
+      }
+      if (isAuthValue && Object.values(PUBLIC_PATHS).includes(route.path)) {
+        return await router.push(PRIVATE_PATHS.MAIN)
+      }
+      if (!isAuthValue && Object.values(PRIVATE_PATHS).includes(route.path)) {
+        return await router.push(PUBLIC_PATHS.SIGN_IN)
+      }
+    }, {
+      immediate: true
+    })
 
     onMounted(async () => {
       await authStore.getUser()
-      if (isAuth.value && Object.values(PUBLIC_PATHS).includes(route.path)) {
-        await router.push(PRIVATE_PATHS.MAIN)
-      }
-      if (!isAuth.value && Object.values(PRIVATE_PATHS).includes(route.path)) {
-        await router.push(PUBLIC_PATHS.SIGN_IN)
-      }
-      isInit.value = true
     })
-
     return { isInit, isAuth }
   }
 }

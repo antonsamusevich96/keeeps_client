@@ -3,6 +3,7 @@ import { type Ref, ref } from 'vue'
 import type { ISignInForm, IUser } from '@/6-entities/auth/types'
 import { authApi } from '@/6-entities/auth/api'
 import { tokensManager } from '@/7-shared/webStorage/local'
+import { tr } from 'vuetify/locale'
 
 
 export const useAuthStore = defineStore('auth', () => {
@@ -23,6 +24,7 @@ export const useAuthStore = defineStore('auth', () => {
     } catch (error) {
       return error
     } finally {
+      isInit.value = true
       isLoading.value = false
     }
   }

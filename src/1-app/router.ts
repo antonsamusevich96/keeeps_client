@@ -19,6 +19,18 @@ const routes = [
           {
             path: ALL_PATH.MAIN,
             component: AppView
+          },
+          {
+            path: ALL_PATH.CATEGORIES,
+            component: AppView
+          },
+          {
+            path: ALL_PATH.ARCHIVE,
+            component: AppView
+          },
+          {
+            path: ALL_PATH.SETTINGS,
+            component: AppView
           }
         ]
       },

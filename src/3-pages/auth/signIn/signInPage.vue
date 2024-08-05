@@ -40,12 +40,7 @@ export default {
         password: password.value,
         isRemember: checkbox.value
       }
-      authStore
-        .signInAction(data)
-        .then(() => {
-          authStore.isAuth = true
-          router.replace(ALL_PATH.MAIN)
-        })
+      await authStore.signInAction(data)
     }
 
     const redirectToSingUp = async () => {

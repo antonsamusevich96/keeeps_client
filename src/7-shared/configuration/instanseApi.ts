@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { tokensManager } from '@/7-shared/webStorage/local'
 import { useRouter } from 'vue-router'
-import { COMMON_PATHS } from '@/7-shared/constants/paths'
+import { COMMON_PATHS, PUBLIC_PATHS } from '@/7-shared/constants/paths'
 
 const instance = axios.create({
   withCredentials: true,
   baseURL: `/api`,
 })
 
-const logoutAndRedirect = () => {
+export const logoutAndRedirect = () => {
   tokensManager.removeTokens()
-  window.location.pathname = '/login'
+  window.location.pathname = PUBLIC_PATHS.SIGN_IN
 }
 
 const retryStatusCodes = [401, 403, 406]

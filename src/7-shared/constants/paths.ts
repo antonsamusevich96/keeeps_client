@@ -5,6 +5,10 @@ export const PUBLIC_PATHS = {
 
 export const PRIVATE_PATHS = {
   MAIN: '/',
+  ARCHIVE: '/archive',
+  SETTINGS: '/settings',
+  CATEGORIES: '/categories',
+
 };
 
 export const COMMON_PATHS = {
